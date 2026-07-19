@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+    <title>Алексей Программист · Боты · Сайты · Heroku</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f6f9fc;
+            font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 1.5rem;
+            color: #1b2a3f;
+            line-height: 1.5;
+        }
+
+        .card {
+            max-width: 1200px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 3.5rem;
+            box-shadow: 0 30px 60px -20px rgba(0, 20, 40, 0.25), 0 8px 20px rgba(0, 0, 0, 0.04);
+            padding: 2.5rem 2.8rem;
+            transition: all 0.2s ease;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+
+        /* ——— шапка ——— */
+        .header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+            gap: 1.2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            background: linear-gradient(145deg, #0b1c2e, #1d3b5c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .badge {
+            background: #eef3f9;
+            padding: 0.5rem 1.4rem;
+            border-radius: 60px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: #1a3349;
+            border: 1px solid rgba(0,0,0,0.02);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+            letter-spacing: 0.3px;
+        }
+
+        .badge i {
+            font-style: normal;
+            background: #1d3b5c;
+            color: white;
+            border-radius: 30px;
+            padding: 0.1rem 0.7rem;
+            margin-left: 0.4rem;
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+
+        /* ——— сетка ——— */
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.8rem;
+            margin: 2.5rem 0 2.8rem;
+        }
+
+        .profile {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .avatar {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #1e3d5e, #264d72);
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.8rem;
+            font-weight: 500;
+            color: white;
+            box-shadow: 0 12px 18px -6px rgba(20, 50, 80, 0.25);
+            margin-bottom: 1.5rem;
+        }
+
+        .name {
+            font-size: 2.6rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin-bottom: 0.4rem;
+            color: #0a1f31;
+        }
+
+        .title {
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: #2f4b69;
+            margin-bottom: 1.2rem;
+        }
+
+        .desc {
+            font-size: 1rem;
+            color: #1f3b55;
+            max-width: 90%;
+            opacity: 0.9;
+            margin-bottom: 1.8rem;
+            line-height: 1.6;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+            margin-bottom: 2rem;
+        }
+
+        .tech-tag {
+            background: white;
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 0.85rem;
+            color: #103247;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.02);
+            border: 1px solid rgba(60, 100, 140, 0.12);
+            transition: all 0.15s;
+        }
+
+        .tech-tag:hover {
+            background: #eaf0f8;
+            border-color: #8aaec9;
+            transform: translateY(-2px);
+        }
+
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.9rem;
+            margin-top: 0.3rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: white;
+            padding: 0.75rem 1.8rem;
+            border-radius: 80px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: #0b253e;
+            text-decoration: none;
+            border: 1px solid rgba(0,0,0,0.04);
+            box-shadow: 0 6px 14px rgba(0, 20, 40, 0.04);
+            transition: 0.2s;
+        }
+
+        .btn-primary {
+            background: #0b253e;
+            color: white;
+            border: none;
+            box-shadow: 0 10px 18px -6px #0b253e30;
+        }
+
+        .btn-primary:hover {
+            background: #123a5a;
+            transform: scale(1.01);
+            box-shadow: 0 14px 22px -8px #0b253e50;
+        }
+
+        .btn-outline:hover {
+            background: #f0f6fe;
+            border-color: #7ea3c2;
+        }
+
+        /* ——— правый блок ——— */
+        .services {
+            display: flex;
+            flex-direction: column;
+            gap: 1.8rem;
+        }
+
+        .service-item {
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border-radius: 2.2rem;
+            padding: 1.6rem 1.8rem;
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            transition: 0.2s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.01);
+        }
+
+        .service-item:hover {
+            background: white;
+            box-shadow: 0 12px 28px -12px rgba(0, 30, 60, 0.12);
+            border-color: #d3e2f0;
+        }
+
+        .service-title {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+        }
+
+        .service-title span {
+            background: #0b253e0c;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #1a415f;
+        }
+
+        .service-desc {
+            color: #1d3b57;
+            opacity: 0.85;
+            font-size: 0.98rem;
+        }
+
+        .service-desc strong {
+            font-weight: 600;
+            color: #0a253e;
+        }
+
+        .pill-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem 0.7rem;
+            margin-top: 0.8rem;
+        }
+
+        .pill {
+            background: #eaf1fa;
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.2px;
+            color: #103247;
+        }
+
+        .pill.heroku {
+            background: #44009910;
+            color: #2b0066;
+            border: 1px solid #44009920;
+        }
+
+        .pill.bot {
+            background: #0066cc10;
+            color: #004d99;
+            border: 1px solid #0066cc20;
+        }
+
+        .pill.site {
+            background: #00886610;
+            color: #006644;
+            border: 1px solid #00886620;
+        }
+
+        /* ——— футер ——— */
+        .footer {
+            margin-top: 2.8rem;
+            padding-top: 1.8rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.03);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.9rem;
+            color: #2a4b6a;
+        }
+
+        .socials {
+            display: flex;
+            gap: 1.2rem;
+        }
+
+        .socials a {
+            color: #1f405e;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1.5px solid transparent;
+            transition: 0.2s;
+        }
+
+        .socials a:hover {
+            border-bottom-color: #1f405e;
+            color: #091c2e;
+        }
+
+        .copy {
+            opacity: 0.5;
+            font-weight: 400;
+            font-size: 0.8rem;
+        }
+
+        /* ——— responsive ——— */
+        @media (max-width: 900px) {
+            .card {
+                padding: 2rem 1.5rem;
+                border-radius: 2.5rem;
+            }
+            .grid {
+                grid-template-columns: 1fr;
+                gap: 1.8rem;
+            }
+            .desc {
+                max-width: 100%;
+            }
+            .name {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                padding: 1.5rem 1rem;
+            }
+            .header {
+                flex-direction: column;
+                align-items: start;
+                gap: 0.6rem;
+            }
+            .btn-group {
+                width: 100%;
+            }
+            .btn {
+                flex: 1 1 auto;
+                justify-content: center;
+            }
+            .service-item {
+                padding: 1.2rem 1.2rem;
+            }
+            .footer {
+                flex-direction: column;
+                align-items: start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <!-- header -->
+        <div class="header">
+            <div class="logo">✦ dev.vision</div>
+            <div class="badge">
+                🚀 доступен для задач
+                <i>freelance</i>
+            </div>
+        </div>
+
+        <!-- main grid -->
+        <div class="grid">
+            <!-- левая колонка: профиль -->
+            <div class="profile">
+                <div class="avatar">А</div>
+                <h1 class="name">Алексей Программист</h1>
+                <div class="title">Telegram · Web · Heroku</div>
+                <p class="desc">
+                    Создаю <strong>ботавтоматов</strong>, 
+                    <strong>современные сайты</strong> и модули для 
+                    <strong>Heroku юзербота</strong>. 
+                    Чистый код, надёжные решения.
+                </p>
+                <div class="tech-tags">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Aiogram</span>
+                    <span class="tech-tag">Flask</span>
+                    <span class="tech-tag">Docker</span>
+                    <span class="tech-tag">Heroku API</span>
+                    <span class="tech-tag">PostgreSQL</span>
+                </div>
+                <div class="btn-group">
+                    <a href="#" class="btn btn-primary">📬 Связаться</a>
+                    <a href="#" class="btn btn-outline">📁 Портфолио</a>
+                </div>
+            </div>
+
+            <!-- правая колонка: услуги / expertise -->
+            <div class="services">
+                <div class="service-item">
+                    <div class="service-title">
+                        🤖 Telegram боты
+                        <span>с нуля</span>
+                    </div>
+                    <div class="service-desc">
+                        <strong>Админ-панели, инлайн-клавиатуры, вебхуки,</strong> 
+                        авторизация, платежи, рассылки. 
+                        Для бизнеса и личных проектов.
+                    </div>
+                    <div class="pill-group">
+                        <span class="pill bot">Aiogram 3.x</span>
+                        <span class="pill bot">python-telegram-bot</span>
+                        <span class="pill bot">Telegram API</span>
+                    </div>
+                </div>
+
+                <div class="service-item">
+                    <div class="service-title">
+                        🌐 Сайты & веб-приложения
+                        <span>front+back</span>
+                    </div>
+                    <div class="service-desc">
+                        <strong>Лендинги, многостраничники, админки,</strong> 
+                        интеграция с ботами и базами данных. 
+                        Адаптивный дизайн, производительность.
+                    </div>
+                    <div class="pill-group">
+                        <span class="pill site">HTML/CSS/JS</span>
+                        <span class="pill site">React/Vue</span>
+                        <span class="pill site">Flask/Django</span>
+                    </div>
+                </div>
+
+                <div class="service-item">
+                    <div class="service-title">
+                        ⚙️ Heroku юзербот модули
+                        <span>расширения</span>
+                    </div>
+                    <div class="service-desc">
+                        <strong>Разработка плагинов, автодеплой,</strong> 
+                        управление dyno, кастомные команды, 
+                        мониторинг и масштабирование.
+                    </div>
+                    <div class="pill-group">
+                        <span class="pill heroku">Heroku CLI</span>
+                        <span class="pill heroku">Python + Flask</span>
+                        <span class="pill heroku">Git + CI</span>
+                        <span class="pill heroku">Redis / PG</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- footer -->
+        <div class="footer">
+            <div class="socials">
+                <a href="#">GitHub</a>
+                <a href="#">Telegram</a>
+                <a href="#">Upwork</a>
+            </div>
+            <div class="copy">
+                © 2026 · сайт-визитка
+            </div>
+        </div>
+    </div>
+</body>
+</html>
