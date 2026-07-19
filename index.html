@@ -978,7 +978,7 @@
                             <span class="project-icon">⚡</span>
                             <span class="project-name">ExtazyW</span>
                         </div>
-                        <a href="ExtazyW.exe" download class="btn-download" id="downloadBtn">⬇ Скачать — <span id="downloadCount">0</span></a>
+                        <a href="ExtazyW.exe" download class="btn-download" id="downloadBtn">⬇ Скачать — <span id="downloadCount">0</span> 👁</a>
                     </div>
                     <div class="project-desc">
                         <strong>Утилита для создания .bat комплексов</strong> с киберпанк интерфейсом. Запуск задач независимо от расширения файла/папки. Полностью на русском.
@@ -1039,11 +1039,12 @@
             }
             findAndSetAvatar();
 
-            // ——— Download counter ———
-            const STORAGE_KEY = 'extazyW_downloads';
+            // ——— Глобальный счётчик скачиваний через localStorage ———
+            const STORAGE_KEY = 'extazyW_global_downloads';
             const downloadBtn = document.getElementById('downloadBtn');
             const countSpan = document.getElementById('downloadCount');
 
+            // Форматирование: до 100 — точное число, иначе округление вниз до сотен с +
             function formatCount(count) {
                 if (count <= 100) {
                     return count.toString();
@@ -1052,13 +1053,16 @@
                 return rounded + '+';
             }
 
+            // Получаем глобальное значение из localStorage
             let currentCount = parseInt(localStorage.getItem(STORAGE_KEY)) || 0;
             countSpan.textContent = formatCount(currentCount);
 
+            // При клике увеличиваем счётчик и сохраняем
             downloadBtn.addEventListener('click', function(e) {
                 currentCount += 1;
                 localStorage.setItem(STORAGE_KEY, currentCount.toString());
                 countSpan.textContent = formatCount(currentCount);
+                // Скачивание происходит автоматически благодаря атрибуту download
             });
 
         })();
