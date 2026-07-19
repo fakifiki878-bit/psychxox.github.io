@@ -398,34 +398,6 @@
             transform: translateY(-3px);
         }
 
-        .btn-download {
-            background: linear-gradient(135deg, #ff00ff, #cc00aa);
-            color: #0a0a0f;
-            border: none;
-            box-shadow: 0 0 30px rgba(255, 0, 255, 0.15);
-        }
-
-        .btn-download:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 0 60px rgba(255, 0, 255, 0.3);
-        }
-
-        .btn-download::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.15), transparent);
-            transform: rotate(45deg) translateX(-100%);
-            transition: 0.6s;
-        }
-
-        .btn-download:hover::after {
-            transform: rotate(45deg) translateX(100%);
-        }
-
         .services {
             display: flex;
             flex-direction: column;
@@ -562,8 +534,9 @@
 
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            grid-template-columns: 1fr;
             gap: 1.5rem;
+            max-width: 600px;
         }
 
         .project-card {
@@ -598,25 +571,33 @@
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), 0 0 40px rgba(0, 255, 255, 0.02);
         }
 
+        .project-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-bottom: 0.5rem;
+        }
+
         .project-icon {
             font-size: 2.2rem;
-            margin-bottom: 0.8rem;
             display: block;
         }
 
         .project-name {
             font-family: 'Orbitron', monospace;
-            font-size: 1rem;
+            font-size: 1.2rem;
             font-weight: 700;
             color: #00ffff;
             letter-spacing: 0.05em;
-            margin-bottom: 0.5rem;
         }
 
         .project-desc {
             color: #8888bb;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             line-height: 1.6;
+            margin: 0.5rem 0 0.8rem;
         }
 
         .project-desc strong {
@@ -628,7 +609,7 @@
             display: flex;
             flex-wrap: wrap;
             gap: 0.4rem;
-            margin-top: 0.8rem;
+            margin-bottom: 1rem;
         }
 
         .project-tag {
@@ -646,6 +627,49 @@
         .project-tag:hover {
             color: #00ffff;
             border-color: rgba(0, 255, 255, 0.15);
+        }
+
+        .btn-download {
+            background: linear-gradient(135deg, #ff00ff, #cc00aa);
+            color: #0a0a0f;
+            border: none;
+            box-shadow: 0 0 30px rgba(255, 0, 255, 0.15);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.6rem 1.6rem;
+            border-radius: 60px;
+            font-family: 'Orbitron', monospace;
+            font-weight: 600;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .btn-download:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 0 60px rgba(255, 0, 255, 0.3);
+        }
+
+        .btn-download::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+            transform: rotate(45deg) translateX(-100%);
+            transition: 0.6s;
+        }
+
+        .btn-download:hover::after {
+            transform: rotate(45deg) translateX(100%);
         }
 
         /* ——— Footer ——— */
@@ -714,8 +738,6 @@
         .service-item:nth-child(2) { animation-delay: 0.2s; }
         .service-item:nth-child(3) { animation-delay: 0.3s; }
         .project-card:nth-child(1) { animation-delay: 0.15s; }
-        .project-card:nth-child(2) { animation-delay: 0.25s; }
-        .project-card:nth-child(3) { animation-delay: 0.35s; }
 
         @keyframes fadeUp {
             to {
@@ -745,11 +767,7 @@
             .desc { max-width: 100%; }
             .name { font-size: 2rem; }
             .profile-header { flex-wrap: wrap; }
-            .projects-grid { grid-template-columns: 1fr 1fr; }
-        }
-
-        @media (max-width: 600px) {
-            .projects-grid { grid-template-columns: 1fr; }
+            .projects-grid { max-width: 100%; }
         }
 
         @media (max-width: 480px) {
@@ -764,6 +782,8 @@
             .profile-header { gap: 1rem; }
             .name { font-size: 1.6rem; }
             .subname { font-size: 0.9rem; }
+            .project-header { flex-direction: column; align-items: flex-start; }
+            .btn-download { width: 100%; justify-content: center; }
         }
     </style>
 </head>
@@ -809,7 +829,6 @@
                     <a href="https://t.me/Psychxox_Codings" target="_blank" class="btn btn-primary">📡 Связаться</a>
                     <a href="https://t.me/Psychxox_Profile" target="_blank" class="btn btn-outline">📁 Портфолио</a>
                     <a href="https://t.me/Psychxox_General" target="_blank" class="btn btn-outline">📎 ТГК</a>
-                    <a href="ExtazyW.exe" download class="btn btn-download">⬇ ExtazyW.exe</a>
                 </div>
             </div>
 
@@ -872,8 +891,13 @@
             <div class="projects-title">▸ Мои проекты</div>
             <div class="projects-grid">
                 <div class="project-card">
-                    <span class="project-icon">⚡</span>
-                    <div class="project-name">ExtazyW</div>
+                    <div class="project-header">
+                        <div>
+                            <span class="project-icon">⚡</span>
+                            <span class="project-name">ExtazyW</span>
+                        </div>
+                        <a href="ExtazyW.exe" download class="btn-download">⬇ Скачать .exe</a>
+                    </div>
                     <div class="project-desc">
                         <strong>Утилита для создания .bat комплексов</strong> с киберпанк интерфейсом. Запуск задач независимо от расширения файла/папки. Полностью на русском.
                     </div>
@@ -881,32 +905,6 @@
                         <span class="project-tag">Python</span>
                         <span class="project-tag">.bat</span>
                         <span class="project-tag">CLI</span>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <span class="project-icon">🤖</span>
-                    <div class="project-name">Telegram Bot Framework</div>
-                    <div class="project-desc">
-                        <strong>Готовый модуль для быстрого создания ботов</strong> с админ-панелью, инлайн-клавиатурами и поддержкой вебхуков.
-                    </div>
-                    <div class="project-tags">
-                        <span class="project-tag">Aiogram</span>
-                        <span class="project-tag">PostgreSQL</span>
-                        <span class="project-tag">Docker</span>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <span class="project-icon">🌐</span>
-                    <div class="project-name">Cyber Landing</div>
-                    <div class="project-desc">
-                        <strong>Адаптивный шаблон для сайтов в стиле киберпанк</strong> с анимациями, неоновой эстетикой и поддержкой тёмной темы.
-                    </div>
-                    <div class="project-tags">
-                        <span class="project-tag">HTML/CSS</span>
-                        <span class="project-tag">JS</span>
-                        <span class="project-tag">Vue</span>
                     </div>
                 </div>
             </div>
