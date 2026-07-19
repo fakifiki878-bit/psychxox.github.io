@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
-    <title>Алексей Программист · Боты · Сайты · Heroku</title>
+    <title>Psychxox · Боты · Сайты · Heroku</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&display=swap" rel="stylesheet">
@@ -98,8 +98,8 @@
         .avatar {
             width: 80px;
             height: 80px;
+            border-radius: 50%;
             background: linear-gradient(135deg, #1e3d5e, #264d72);
-            border-radius: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -108,6 +108,28 @@
             color: white;
             box-shadow: 0 12px 18px -6px rgba(20, 50, 80, 0.25);
             margin-bottom: 1.5rem;
+            overflow: hidden;
+            flex-shrink: 0;
+            object-fit: cover;
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .avatar-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #1e3d5e, #264d72);
+            color: white;
+            font-size: 2.8rem;
+            font-weight: 500;
         }
 
         .name {
@@ -115,8 +137,16 @@
             font-weight: 700;
             letter-spacing: -0.02em;
             line-height: 1.2;
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.1rem;
             color: #0a1f31;
+        }
+
+        .subname {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #4a6a88;
+            margin-bottom: 0.6rem;
+            letter-spacing: 0.2px;
         }
 
         .title {
@@ -375,7 +405,7 @@
     <div class="card">
         <!-- header -->
         <div class="header">
-            <div class="logo">✦ dev.vision</div>
+            <div class="logo">✦ Gradient OP</div>
             <div class="badge">
                 🚀 доступен для задач
                 <i>freelance</i>
@@ -386,9 +416,12 @@
         <div class="grid">
             <!-- левая колонка: профиль -->
             <div class="profile">
-                <div class="avatar">А</div>
-                <h1 class="name">Алексей Программист</h1>
-                <div class="title">Telegram · Web · Heroku</div>
+                <div class="avatar" id="avatarContainer">
+                    <!-- сюда вставится картинка или OP -->
+                </div>
+                <h1 class="name">Psychxox & Programmer</h1>
+                <div class="subname">Сергей | 19 лет</div>
+                <div class="title">Telegram · Сайты · Heroku</div>
                 <p class="desc">
                     Создаю <strong>ботавтоматов</strong>, 
                     <strong>современные сайты</strong> и модули для 
@@ -398,14 +431,14 @@
                 <div class="tech-tags">
                     <span class="tech-tag">Python</span>
                     <span class="tech-tag">Aiogram</span>
-                    <span class="tech-tag">Flask</span>
-                    <span class="tech-tag">Docker</span>
+                    <span class="tech-tag">Django</span>
                     <span class="tech-tag">Heroku API</span>
                     <span class="tech-tag">PostgreSQL</span>
+                    <span class="tech-tag">Git</span>
                 </div>
                 <div class="btn-group">
-                    <a href="#" class="btn btn-primary">📬 Связаться</a>
-                    <a href="#" class="btn btn-outline">📁 Портфолио</a>
+                    <a href="https://t.me/Psychxox_Codings" target="_blank" class="btn btn-primary">📬 Связаться</a>
+                    <a href="https://t.me/Psychxox_Profile" target="_blank" class="btn btn-outline">📁 Портфолио</a>
                 </div>
             </div>
 
@@ -441,7 +474,7 @@
                     <div class="pill-group">
                         <span class="pill site">HTML/CSS/JS</span>
                         <span class="pill site">React/Vue</span>
-                        <span class="pill site">Flask/Django</span>
+                        <span class="pill site">Django / FastAPI</span>
                     </div>
                 </div>
 
@@ -457,7 +490,7 @@
                     </div>
                     <div class="pill-group">
                         <span class="pill heroku">Heroku CLI</span>
-                        <span class="pill heroku">Python + Flask</span>
+                        <span class="pill heroku">Python + FastAPI</span>
                         <span class="pill heroku">Git + CI</span>
                         <span class="pill heroku">Redis / PG</span>
                     </div>
@@ -477,5 +510,54 @@
             </div>
         </div>
     </div>
+
+    <script>
+        (function() {
+            const avatarContainer = document.getElementById('avatarContainer');
+
+            // список возможных расширений
+            const extensions = ['jpg', 'jpeg', 'png', 'webp', 'gif', 'svg', 'bmp', 'ico'];
+            let found = false;
+
+            // функция, которая пытается загрузить картинку
+            function tryLoadAvatar(ext) {
+                return new Promise((resolve) => {
+                    const img = new Image();
+                    img.onload = function() {
+                        // картинка загрузилась — успех
+                        resolve(true);
+                    };
+                    img.onerror = function() {
+                        resolve(false);
+                    };
+                    img.src = `ava.${ext}?t=${Date.now()}`; // добавляем параметр, чтобы избежать кеша
+                });
+            }
+
+            // асинхронно проверяем все расширения
+            async function findAndSetAvatar() {
+                for (let ext of extensions) {
+                    const success = await tryLoadAvatar(ext);
+                    if (success) {
+                        // нашли рабочий файл — вставляем img
+                        const img = document.createElement('img');
+                        img.src = `ava.${ext}?t=${Date.now()}`;
+                        img.alt = 'avatar';
+                        avatarContainer.innerHTML = '';
+                        avatarContainer.appendChild(img);
+                        found = true;
+                        break;
+                    }
+                }
+
+                // если ничего не нашли — оставляем "OP"
+                if (!found) {
+                    avatarContainer.innerHTML = `<div class="avatar-placeholder">OP</div>`;
+                }
+            }
+
+            findAndSetAvatar();
+        })();
+    </script>
 </body>
 </html>
