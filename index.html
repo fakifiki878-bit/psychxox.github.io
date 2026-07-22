@@ -198,6 +198,13 @@
             gap: 1.2rem;
         }
 
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
         .logo {
             font-family: 'Orbitron', monospace;
             font-size: 1.8rem;
@@ -215,6 +222,50 @@
         @keyframes shimmer {
             0% { background-position: 0% center; }
             100% { background-position: 200% center; }
+        }
+
+        .btn-stars {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 1.2rem;
+            border-radius: 60px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            text-decoration: none;
+            background: linear-gradient(135deg, #ffd700, #ffaa00);
+            color: #0a0a0f;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.15);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .btn-stars:hover {
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.3);
+            border-color: #ffd700;
+        }
+
+        .btn-stars::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: rotate(45deg) translateX(-100%);
+            transition: 0.6s;
+        }
+
+        .btn-stars:hover::after {
+            transform: rotate(45deg) translateX(100%);
         }
 
         .badge {
@@ -957,11 +1008,14 @@
             .category-body.open { padding: 0 1.2rem 1.2rem 1.2rem; }
             .service-title { font-size: 0.95rem; }
             .service-title .title-text { font-size: 0.95rem; }
+            .header-left { gap: 1rem; }
         }
 
         @media (max-width: 480px) {
             .card { padding: 1.5rem 1rem; border-radius: 1.5rem; }
             .header { flex-direction: column; align-items: start; gap: 0.6rem; }
+            .header-left { width: 100%; justify-content: space-between; }
+            .btn-stars { font-size: 0.6rem; padding: 0.3rem 0.8rem; }
             .btn-group { width: 100%; }
             .btn { flex: 1 1 auto; justify-content: center; font-size: 0.65rem; padding: 0.6rem 1.2rem; }
             .service-item { padding: 1.2rem 1.2rem; }
@@ -991,7 +1045,12 @@
 
     <div class="card">
         <div class="header">
-            <div class="logo">✦ Gradient OP</div>
+            <div class="header-left">
+                <div class="logo">✦ Gradient OP</div>
+                <a href="https://t.me/StarsZakupBot?start=ref_r_9827041ea9" target="_blank" class="btn-stars">
+                    ⭐ Выгодные звёзды ТГ
+                </a>
+            </div>
             <div class="badge">
                 <span class="lang-en">⚡ available for tasks</span>
                 <i>freelance</i>
